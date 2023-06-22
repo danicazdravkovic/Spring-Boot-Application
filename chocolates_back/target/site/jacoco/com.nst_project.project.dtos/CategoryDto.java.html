@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CategoryDto.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">chocolates_back</a> &gt; <a href="index.source.html" class="el_package">com.nst_project.project.dtos</a> &gt; <span class="el_source">CategoryDto.java</span></div><h1>CategoryDto.java</h1><pre class="source lang-java linenums">/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.nst_project.project.dtos;
+
+import java.util.Objects;
+
+/**
+ *
+ * @author nodas
+ */
+public class CategoryDto {
+
+    private Integer categoryID;
+    private String name;
+    private String description;
+
+<span class="fc" id="L19">    public CategoryDto() {</span>
+<span class="fc" id="L20">    }</span>
+
+<span class="fc" id="L22">    public CategoryDto(Integer categoryID, String name, String description) {</span>
+<span class="fc" id="L23">        this.categoryID = categoryID;</span>
+<span class="fc" id="L24">        this.name = name;</span>
+<span class="fc" id="L25">        this.description = description;</span>
+<span class="fc" id="L26">    }</span>
+
+    public String getDescription() {
+<span class="fc" id="L29">        return description;</span>
+    }
+
+    public void setDescription(String description) {
+<span class="fc" id="L33">        this.description = description;</span>
+<span class="fc" id="L34">    }</span>
+
+    public Integer getCategoryID() {
+<span class="fc" id="L37">        return categoryID;</span>
+    }
+
+    public void setCategoryID(Integer categoryID) {
+<span class="fc" id="L41">        this.categoryID = categoryID;</span>
+<span class="fc" id="L42">    }</span>
+
+    public String getName() {
+<span class="fc" id="L45">        return name;</span>
+    }
+
+    public void setName(String name) {
+<span class="fc" id="L49">        this.name = name;</span>
+<span class="fc" id="L50">    }</span>
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L54">        return Objects.hash(categoryID, name, description);</span>
+    }
+
+    @Override
+    public boolean equals(Object o) {
+<span class="fc bfc" id="L59" title="All 2 branches covered.">        if (this == o) {</span>
+<span class="fc" id="L60">            return true;</span>
+        }
+<span class="pc bpc" id="L62" title="2 of 4 branches missed.">        if (o == null || getClass() != o.getClass()) {</span>
+<span class="nc" id="L63">            return false;</span>
+        }
+<span class="fc" id="L65">        CategoryDto that = (CategoryDto) o;</span>
+<span class="pc bpc" id="L66" title="2 of 6 branches missed.">        return Objects.equals(categoryID, that.categoryID) &amp;&amp; Objects.equals(name, that.name) &amp;&amp; Objects.equals(description, that.description);</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L71"> return &quot;CategoryDto{&quot; +</span>
+                &quot;categoryID=&quot; + categoryID +
+                &quot;, name='&quot; + name + '\'' +
+                &quot;, description='&quot; + description + '\'' +
+                '}';    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

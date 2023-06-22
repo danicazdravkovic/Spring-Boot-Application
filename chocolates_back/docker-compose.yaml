@@ -1,0 +1,53 @@
+# version: '3.9'
+# services:
+#   mariadb:
+#     image: "mariadb"
+#     ports: 
+#       - 3306:3306
+#     restart: unless-stopped
+#     environment:
+#       - MARIADB_USER=root
+#       # - MARIADB_PASSWORD=root
+#       - MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=1
+#       - MARIADB_ALLOW_EMPTY_PASSWORD=1
+#       # - MARIADB_ROOT_PASSWORD=root
+#     command: --init-file /data/application/init.sql #kreiranje fajla unutar kontejnera
+#     volumes: #povezivanje mog filesistema sa dockerom
+#       - ./init.sql:/data/application/init.sql
+#   app:
+#     depends_on:
+#       - "mariadb"
+#     image: "sweapp:1.0" 
+#     ports:
+#       - 8080:8080
+#     # environment:
+#       # SPRING_DATASOURCE_URL: jdbc:mysql://mariadb/swe
+#     restart: on-failure  
+
+version: "3"
+services:
+  employee-jdbc:
+    image: employee-jdbc
+    ports:
+      - "8080:8080"
+    networks:
+      - employee-mysql
+    depends_on:
+      - mysqldb
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysqldb:3306/bootdb
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+
+ 
+  mysqldb:
+    image: mysql:8
+    networks:
+      - employee-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=bootdb  
+
+networks:
+  employee-mysql:
+  

@@ -1,0 +1,3 @@
+UserRepository(I)->crud operacije
+UserController-> za rad sa rutama, koristi operacije iz UserRepository
+

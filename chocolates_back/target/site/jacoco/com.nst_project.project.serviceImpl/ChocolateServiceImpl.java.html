@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ChocolateServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">chocolates_back</a> &gt; <a href="index.source.html" class="el_package">com.nst_project.project.serviceImpl</a> &gt; <span class="el_source">ChocolateServiceImpl.java</span></div><h1>ChocolateServiceImpl.java</h1><pre class="source lang-java linenums">/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.nst_project.project.serviceImpl;
+
+import com.nst_project.project.dtos.CategoryDto;
+import com.nst_project.project.dtos.ChocolateDto;
+import com.nst_project.project.exception.ChocolateException;
+import com.nst_project.project.mapper.ChocolateMapper;
+import com.nst_project.project.model.Chocolate;
+import com.nst_project.project.repository.ChocolateRepository;
+import com.nst_project.project.service.ChocolateService;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.stream.Collectors;
+import org.springframework.stereotype.Service;
+
+/**
+ *
+ * @author nodas
+ */
+@Service
+public class ChocolateServiceImpl implements ChocolateService {
+
+    private final ChocolateRepository chocolateRepository;
+    private final ChocolateMapper chocolateMapper;
+
+<span class="fc" id="L29">    public ChocolateServiceImpl(ChocolateRepository chocolateRepository, ChocolateMapper chocolateMapper) {</span>
+<span class="fc" id="L30">        this.chocolateRepository = chocolateRepository;</span>
+<span class="fc" id="L31">        this.chocolateMapper = chocolateMapper;</span>
+<span class="fc" id="L32">    }</span>
+//
+//    public ChocolateServiceImpl() {
+//        this.chocolateRepository = null;
+//        this.chocolateMapper = null;
+//    }
+
+//    @Override
+//    public List&lt;ChocolateDto&gt; findAllByOrederByName() {
+//        List&lt;ChocolateDto&gt; chocolates=chocolateRepository.findAllByOrederByName();
+//        return chocolates.stream().map(chocolateMapper::toDto).collect(Collectors.toList());
+//    }
+//    
+    @Override
+    public ChocolateDto save(ChocolateDto chocolateDto) throws ChocolateException {
+//        if(chocolateRepository.findById(chocolateDto.getChocolateID()).isPresent()){
+//            throw new ChocolateException(&quot;That chocolate already exists&quot;);
+//        }
+//CategoryDto category=chocolateDto.getCategoryDto();
+<span class="fc" id="L51">        return chocolateMapper.toDto(chocolateRepository.save(chocolateMapper.toEntity(chocolateDto)));</span>
+    }
+
+    @Override
+    public List&lt;ChocolateDto&gt; findAll() {
+<span class="fc" id="L56">        List&lt;Chocolate&gt; chocolates = chocolateRepository.findAll();</span>
+<span class="fc" id="L57">        return chocolates.stream().map(chocolateMapper::toDto).collect(Collectors.toList());</span>
+    }
+
+    @Override
+    public ChocolateDto findById(Integer id) throws ChocolateException {
+<span class="pc" id="L62">        Chocolate c = chocolateRepository.findById(id).orElseThrow(() -&gt; new ChocolateException(&quot;Not found chocolate with id &quot; + id));</span>
+<span class="fc" id="L63">        return chocolateMapper.toDto(c);</span>
+    }
+
+    @Override
+    public ChocolateDto update(ChocolateDto chocolateDto) throws ChocolateException {
+<span class="pc bpc" id="L68" title="1 of 2 branches missed.">    if (chocolateRepository.findById(chocolateDto.getChocolateID()).isPresent())</span>
+//            return chocolateRepository.save(chocolateDto);
+<span class="fc" id="L70">                return chocolateMapper.toDto(chocolateRepository.save(chocolateMapper.toEntity(chocolateDto)));</span>
+<span class="nc" id="L71">        throw new ChocolateException(&quot;That chocolate does not exist!&quot;);</span>
+   
+    }
+
+    @Override
+    public void delete(Integer id) {
+        try{
+<span class="fc" id="L78">        chocolateRepository.deleteById(id);</span>
+<span class="nc" id="L79">        }catch (Exception e){</span>
+<span class="nc" id="L80">            throw new ChocolateException(&quot;Chocolate can't been deleted because some orders contain this chocolate&quot;);</span>
+<span class="fc" id="L81">        }</span>
+<span class="fc" id="L82">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
